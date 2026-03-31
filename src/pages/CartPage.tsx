@@ -3,7 +3,6 @@ import { useCart, useUpdateCartItem, useRemoveCartItem } from '@/hooks/useCart';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ShoppingCart, Trash2, ArrowLeft, Lock, Truck, RotateCcw, Minus, Plus } from 'lucide-react';
-import jerseyFrontImg from '@/assets/jersey-front.png';
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -12,6 +11,8 @@ const CartPage = () => {
   const removeItem = useRemoveCartItem();
 
   const subtotal = items?.reduce((sum, i) => sum + i.price * i.quantity, 0) ?? 0;
+  const shipping = 79;
+  const total = subtotal + shipping;
 
   if (isLoading) {
     return (
@@ -52,7 +53,7 @@ const CartPage = () => {
         {items.map(item => (
           <div key={item.id} className="rounded-xl border border-border bg-card p-3 flex gap-3">
             <img
-              src={jerseyFrontImg}
+              src={item.product?.images?.[0] || 'https://i.postimg.cc/R0G679pC/PUMA-x-RCB-2026-Men-s-Official-Match-Jersey.jpg'}
               alt="Jersey"
               className="w-16 h-20 object-contain rounded-lg bg-muted flex-shrink-0"
             />
@@ -113,12 +114,12 @@ const CartPage = () => {
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-muted-foreground">Shipping</span>
-            <span className="font-semibold text-primary">FAST</span>
+            <span className="font-semibold text-foreground">₹{shipping}</span>
           </div>
           <div className="h-px bg-border" />
           <div className="flex justify-between text-sm font-bold text-foreground">
             <span>Total</span>
-            <span>₹{subtotal.toLocaleString('en-IN')}</span>
+            <span>₹{total.toLocaleString('en-IN')}</span>
           </div>
           <Button
             onClick={() => navigate('/checkout')}
@@ -135,7 +136,7 @@ const CartPage = () => {
         <div className="max-w-lg mx-auto flex items-center gap-3">
           <div className="flex-1">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">Total</p>
-            <p className="text-base font-bold text-foreground">₹{subtotal.toLocaleString('en-IN')}</p>
+            <p className="text-base font-bold text-foreground">₹{total.toLocaleString('en-IN')}</p>
           </div>
           <Button
             onClick={() => navigate('/checkout')}

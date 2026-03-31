@@ -9,7 +9,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, Lock, Truck, RotateCcw, Loader2, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
-import jerseyFrontImg from '@/assets/jersey-front.png';
 
 const ADDRESS_KEY = 'rcb_saved_address';
 
@@ -81,7 +80,9 @@ const CheckoutPage = () => {
         name: c.product?.name ?? 'RCB Jersey',
       }));
 
-  const total = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const shipping = 79;
+  const total = subtotal + shipping;
 
   useEffect(() => {
     localStorage.setItem(ADDRESS_KEY, JSON.stringify(address));
@@ -235,7 +236,7 @@ const CheckoutPage = () => {
 
               {displayItems.map((item, i) => (
                 <div key={i} className="flex gap-2.5">
-                  <img src={jerseyFrontImg} alt="Jersey" className="w-12 h-14 object-contain rounded-lg bg-muted flex-shrink-0" />
+                  <img src={product?.images?.[0] || 'https://i.postimg.cc/R0G679pC/PUMA-x-RCB-2026-Men-s-Official-Match-Jersey.jpg'} alt="Jersey" className="w-12 h-14 object-contain rounded-lg bg-muted flex-shrink-0" />
                   <div className="flex-1 min-w-0 space-y-0.5">
                     <p className="text-xs font-semibold text-foreground truncate">{item.name}</p>
                     <p className="text-[11px] text-muted-foreground">Size: {item.size} · Qty: {item.quantity}</p>
@@ -252,11 +253,11 @@ const CheckoutPage = () => {
               <div className="h-px bg-border" />
               <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-medium text-foreground">₹{total.toLocaleString('en-IN')}</span>
+                <span className="font-medium text-foreground">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Shipping</span>
-                <span className="font-semibold text-primary">FAST</span>
+                <span className="font-semibold text-foreground">₹{shipping}</span>
               </div>
               <div className="h-px bg-border" />
               <div className="flex justify-between text-sm font-bold text-foreground">

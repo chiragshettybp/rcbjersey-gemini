@@ -13,10 +13,6 @@ import { DispatchSlider } from '@/components/product/DispatchSlider';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2, Heart, Zap, ShoppingCart, Lock, Truck, RotateCcw } from 'lucide-react';
-import jerseyFront from '@/assets/jersey-front.png';
-import jerseyBack from '@/assets/jersey-back.png';
-
-const LOCAL_IMAGES = [jerseyFront, jerseyBack, jerseyFront, jerseyBack];
 
 const Index = () => {
   const navigate = useNavigate();
@@ -99,9 +95,9 @@ const Index = () => {
       <div className="mx-auto max-w-6xl px-3 py-3 lg:px-4 lg:py-10">
         <div className="grid gap-4 lg:grid-cols-[1fr_420px] lg:gap-12">
           {/* Left: Image Gallery */}
-          <div>
+          <div className="min-w-0">
             <ImageGallery
-              images={LOCAL_IMAGES}
+              images={product.images || []}
               personalization={{ name: persName, number: persNumber }}
             />
           </div>

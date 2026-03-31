@@ -8,8 +8,6 @@ import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ArrowLeft, ShoppingCart, Loader2, Check, AlertCircle, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import jerseyBackImg from '@/assets/jersey-back.png';
-import jerseyFrontImg from '@/assets/jersey-front.png';
 
 const STORAGE_KEY = 'rcb_personalization';
 
@@ -115,7 +113,9 @@ const PersonalizePage = () => {
     );
   }
 
-  const jerseyImage = view === 'back' ? jerseyBackImg : jerseyFrontImg;
+  const jerseyImage = view === 'back' 
+    ? 'https://i.postimg.cc/Dw1nkg1N/PUMA-x-RCB-2026-Men-s-Official-Match-Jersey-(1).jpg'
+    : 'https://i.postimg.cc/R0G679pC/PUMA-x-RCB-2026-Men-s-Official-Match-Jersey.jpg';
 
   return (
     <div className="min-h-screen bg-background pb-28 lg:pb-10">
